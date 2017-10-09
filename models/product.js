@@ -1,4 +1,4 @@
-var MongoClient = require('mongodb').MongoClient;
+/*var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/cartmandb";
 var products;
 
@@ -29,10 +29,10 @@ module.exports.getData = function(callback){
 			return result;
 		});
 	});
-}
+}*/
   // Error in next line
 	//console.log(products.length);
-/*var products = [{
+var products = [{
 	_id: 1,
     imagePath: 'https://www.cashoverflow.in/wp-content/uploads/2017/05/Standard-Chartered-Platinum-Rewards-Card.png?x21615',
     title: 'Standard Chartered Platinum Rewards Card',
@@ -62,5 +62,7 @@ module.exports.getData = function(callback){
     title: "HDFC Regalia Credit Card",
     description: "https://www.hdfcbank.com",
     price: 50
-  }];*/
+  }];
+  
+module.exports = products;  
 
