@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Your Card application</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+        integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <link href="https://bootstrapdocs.com/v3.3.1/docs/examples/cover/cover.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+  <link rel='stylesheet' href='/stylesheets/style.css'/>
+  <script src="https://code.jquery.com/jquery-1.12.3.min.js"   integrity="sha256-aaODHAgvwQW1bFOGXMeX+pC4PZIPsvn2h1sArYOhgXQ="   crossorigin="anonymous"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+  <nav class="navbar navbar-form">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">Some Bank</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i>  View Your Cart</a></li>
+                <li><div id="fb-root"></div>
+                <script>(function(d, s, id) {
+                  var js, fjs = d.getElementsByTagName(s)[0];
+                  if (d.getElementById(id)) return;
+                  js = d.createElement(s); js.id = id;
+                  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.10&appId=1934872996838463";
+                  fjs.parentNode.insertBefore(js, fjs);
+                }(document, 'script', 'facebook-jssdk'));</script>
+
+                <div class="fb-login-button" data-max-rows="1" data-size="large"
+                data-button-type="continue_with" data-show-faces="false"
+                data-auto-logout-link="true" data-use-continue-as="true"
+                onlogin="checkLoginState();"></div></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+
+    </div><!-- /.container-fluid -->
+</nav>
+  <div class="container">
+      <% for(var i=0; i < products.length; i++) { %>
+      <div class="row">
+
+        <div class="col-sm-8 col-md-6">
+            <div class="thumbnail">
+                <img src="<%= products[i].imagePath %>" alt="..." class="img-responsive">
+                <div class="caption">
+                    <h3><%= products[i].title %></h3>
+                    <a target="_blank" href="<%= products[i].description %>" class="btn btn-lg btn-default">View More</a>
+                    <div class="clearfix">
+                        <div class="price pull-left">Annual fee Rs. <%= products[i].price %></div>
+                        <a href="/add-to-cart/<%= products[i].title %>" class="btn btn-success pull-right" role="button">Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+      <% } %>
+
+      </div>
+
+      <div >
+        <div class="inner">
+          <p>This site has been built using Express with Bootstrap.</p>
+        </div>
+      </div>
+
+
+
+</body>
+</html>
+
+<script>
+
+function checkLoginState() {
+  FB.getLoginStatus(function(response) {
+    statusChangeCallback(response);
+  });
+}
+
+
+function statusChangeCallback(response) {
+    console.log('statusChangeCallback');
+    console.log(response);
+    // The response object is returned with a status field that lets the
+    // app know the current login status of the person.
+    // Full docs on the response object can be found in the documentation
+    // for FB.getLoginStatus().
+    if (response.status === 'connected') {
+      // Logged into your app and Facebook.
+      testAPI();
+    } else {
+      // The person is not logged into your app or we are unable to tell.
+
+    }
+  }
+  function testAPI() {
+   console.log('Welcome!  Fetching your information.... ');
+   FB.api('/me', function(response) {
+     console.log('Successful login for: ' + response.name);
+     document.getElementById('guestUser').value = response.name ;
+   });
+ }
+
+</script>

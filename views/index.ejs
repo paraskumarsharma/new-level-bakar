@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://bootstrapdocs.com/v3.3.1/docs/examples/cover/cover.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Your Card application</title>
+  </head>
+  <body>
+
+    <div class="site-wrapper">
+      <div class="site-wrapper-inner">
+        <div class="cover-container">
+          <div class="masthead clearfix">
+            <div class="inner">
+              <h3 class="masthead-brand">Some Bank</h3>
+              <nav>
+                <ul class="nav masthead-nav">
+                  <li class="active"><a href="#">Home</a></li>
+                  <li><a href="about">About</a></li>
+                  <li><a href="contact">Contact</a></li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+
+          <div class="inner cover">
+            <h1 class="cover-heading">POC For A Credit Card Application</h1>
+            <p class="lead">Webpage opened on: <%= new Date()%></p>
+            <form action="/proceed" method="post">
+            <p class="lead">Please enter your name:
+              <input class="btn-default" type="text" id="guestUser" name="guestUser"
+              placeholder="First Name, Last Name">
+            </p>
+            <p class="lead">
+                <input type="submit" name="" class="btn btn-lg btn-default" value="Proceed to POC">
+            </form>
+            </p>
+
+            <div id="fb-root"></div>
+            <script>(function(d, s, id) {
+              var js, fjs = d.getElementsByTagName(s)[0];
+              if (d.getElementById(id)) return;
+              js = d.createElement(s); js.id = id;
+              js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.10&appId=1934872996838463";
+              fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));</script>
+
+            <div class="fb-login-button" data-max-rows="1" data-size="large"
+            data-button-type="continue_with" data-show-faces="false"
+            data-auto-logout-link="true" data-use-continue-as="true"
+            onlogin="checkLoginState();"></div>
+
+          </div>
+
+          <div class="mastfoot">
+            <div class="inner">
+              <p>This site has been built using Express with Bootstrap.</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </body>
+</html>
+
+<script>
+
+function checkLoginState() {
+  FB.getLoginStatus(function(response) {
+    statusChangeCallback(response);
+  });
+}
+
+
+function statusChangeCallback(response) {
+    console.log('statusChangeCallback');
+    console.log(response);
+    // The response object is returned with a status field that lets the
+    // app know the current login status of the person.
+    // Full docs on the response object can be found in the documentation
+    // for FB.getLoginStatus().
+    if (response.status === 'connected') {
+      // Logged into your app and Facebook.
+      testAPI();
+    } else {
+      // The person is not logged into your app or we are unable to tell.
+      
+    }
+  }
+  function testAPI() {
+   console.log('Welcome!  Fetching your information.... ');
+   FB.api('/me', function(response) {
+     console.log('Successful login for: ' + response.name);
+     document.getElementById('guestUser').value = response.name ;
+   });
+ }
+
+</script>
