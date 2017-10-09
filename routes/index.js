@@ -37,10 +37,10 @@ router.get('/contact', function(req, res){
 router.post('/cardmall', function(req, res, next) {
   console.log('cardmall clicked....');
   console.log(Product.length);
-  /******************
+  /*******************/
   var MongoClient = require('mongodb').MongoClient;
 	//var url = "mongodb://localhost:27017/cartmandb";
-	var url = "mongodb://paraskumarsharma:BiKJM6Mixwla9GIbVxPfHcqLqHaFkcJUPsPnXqDcL3eDziRhdd1cvTv8k8TT9OSB2meXMRyS8EX9pXWW6wwmnQ==@paraskumarsharma.documents.azure.com:10255/cartmandb?ssl=true&replicaSet=globaldb";
+	var url = process.env.MONGODB_URI || "mongodb://paraskumarsharma:BiKJM6Mixwla9GIbVxPfHcqLqHaFkcJUPsPnXqDcL3eDziRhdd1cvTv8k8TT9OSB2meXMRyS8EX9pXWW6wwmnQ==@paraskumarsharma.documents.azure.com:10255/cartmandb?ssl=true&replicaSet=globaldb";
 	MongoClient.connect(url, function(err, db) {
 		if (err) throw err;
 		db.collection("creditcards").find({}).toArray(function(err, result) {
@@ -53,7 +53,7 @@ router.post('/cardmall', function(req, res, next) {
 		});
 	});
   
-  ****/
+  
   
   /*Product.getData(function(err, data){
     if (err) {
@@ -64,10 +64,10 @@ router.post('/cardmall', function(req, res, next) {
 	  res.render('cardmall', {
 		products: data
 		});
-  });*/
+  });
   res.render('cardmall', {
       products: Product
-    });
+    });*/
   });
 
 
