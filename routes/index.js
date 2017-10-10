@@ -41,6 +41,8 @@ router.post('/cardmall', function(req, res, next) {
   var MongoClient = require('mongodb').MongoClient;
 	//var url = "mongodb://localhost:27017/cartmandb";
 	var url = process.env.MONGODB_URI || "mongodb://paraskumarsharma:BiKJM6Mixwla9GIbVxPfHcqLqHaFkcJUPsPnXqDcL3eDziRhdd1cvTv8k8TT9OSB2meXMRyS8EX9pXWW6wwmnQ==@paraskumarsharma.documents.azure.com:10255/cartmandb?ssl=true&replicaSet=globaldb";
+	console.log("URL: "");
+	console.log(url);
 	MongoClient.connect(url, function(err, db) {
 		if (err) throw err;
 		db.collection("creditcards").find({}).toArray(function(err, result) {
